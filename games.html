@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade & Games - QuizNest</title>
+  <meta name="description" content="Engaging web development speed challenges, code snippet guessing games, and rapid-fire quiz modes.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="games.html" class="active">Arcade & Games</a></li>
+          <li><a href="custom-test.html">Custom Test</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </nav>
+
+      <div id="navUserBadge" class="nav-user-badge">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= Games Main Container ================= -->
+  <main class="container" style="padding: 40px 24px; flex: 1;">
+    
+    <div class="section-header">
+      <span class="section-tag">Interactive Arcade</span>
+      <h2>Quiz & Coding Mini-Games</h2>
+      <p>Test your reflexes, coding instincts, and web development speed under pressure!</p>
+    </div>
+
+    <!-- GAME 1: 60-Second Web Development Speed Blitz -->
+    <div class="game-card" style="margin-bottom: 50px; background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(15, 23, 42, 0.9));">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div style="text-align: left;">
+          <span class="badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.4);">
+            Game Mode 1
+          </span>
+          <h3 style="font-size: 1.5rem; margin-top: 4px;">⚡ 60-Second Web Dev Speed Blitz</h3>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">HIGH SCORE</div>
+            <div id="blitzHighScore" style="font-size: 1.3rem; font-weight: 800; color: #fde68a;">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blitz Intro State -->
+      <div id="blitzIntro" style="max-width: 500px; margin: 0 auto; padding: 20px 0;">
+        <div style="font-size: 3.5rem; margin-bottom: 16px;">⏱️</div>
+        <h4>Ready for 60 Seconds of Non-Stop Coding Questions?</h4>
+        <p style="color: var(--text-secondary); margin: 12px 0 24px;">
+          Answer as many Web Development questions as you can before the clock runs out.
+          Maintain consecutive streaks to multiply your score up to 5x!
+        </p>
+        <button class="btn btn-primary btn-lg" id="btnStartBlitz">
+          🔥 Start Speed Blitz Now
+        </button>
+      </div>
+
+      <!-- Blitz Active Arena -->
+      <div id="blitzArena" style="display: none; max-width: 650px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; background: rgba(0,0,0,0.3); padding: 12px 20px; border-radius: var(--radius-md);">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">TIME LEFT</span>
+            <div class="blitz-timer" id="blitzCountdown">60</div>
+          </div>
+
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">SCORE</span>
+            <div id="blitzLiveScore" style="font-size: 2rem; font-weight: 800; color: var(--success); font-family: var(--font-mono);">0</div>
+          </div>
+
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">COMBO MULTIPLIER</span>
+            <div id="blitzCombo" style="font-size: 2rem; font-weight: 800; color: #f59e0b; font-family: var(--font-mono);">1x</div>
+          </div>
+        </div>
+
+        <div id="blitzQuestionText" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; min-height: 60px;">
+          Question text loading...
+        </div>
+
+        <div id="blitzOptions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Blitz Game Over Screen -->
+      <div id="blitzGameOver" style="display: none; max-width: 500px; margin: 0 auto; padding: 20px 0;">
+        <div style="font-size: 3.5rem; margin-bottom: 12px;">🏁</div>
+        <h3 style="font-size: 1.8rem; margin-bottom: 8px;">Time's Up!</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+          Great reflex test! Here is your final arcade score:
+        </p>
+        <div id="blitzFinalScore" style="font-size: 3.5rem; font-weight: 800; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 24px;">
+          0
+        </div>
+        <button class="btn btn-primary btn-lg" id="btnRestartBlitz">
+          🔄 Play Again
+        </button>
+      </div>
+    </div>
+
+    <!-- GAME 2: Code Snippet Prediction Quest -->
+    <div class="game-card">
+      <div style="text-align: left; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 24px;">
+        <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.4);">
+          Game Mode 2
+        </span>
+        <h3 style="font-size: 1.5rem; margin-top: 4px;">🧠 Guess the Code Output Quest</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+          Examine the code snippet below and predict what will be printed to the console.
+        </p>
+      </div>
+
+      <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+        <div style="background: #080c16; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px;">
+          <pre id="questCodeBlock" style="font-family: var(--font-mono); font-size: 1.05rem; color: #a5b4fc; white-space: pre-wrap; line-height: 1.6;"></pre>
+        </div>
+
+        <div id="questOptions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div id="questExplanation" class="explanation-card" style="display: none; margin-bottom: 20px;">
+          <!-- Explanation -->
+        </div>
+
+        <button class="btn btn-outline" id="btnNextQuest" style="width: 100%;">
+          Next Snippet ➜
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= Site Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand-logo">
+            <span class="logo-icon">⚡</span>
+            <span>Quiz<span class="logo-highlight">Nest</span></span>
+          </div>
+          <p>
+            Gamified learning improves rapid recall and programming instincts.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Arcade Modes</h5>
+          <ul>
+            <li><a href="#blitzIntro">60-Sec Speed Blitz</a></li>
+            <li><a href="#questCodeBlock">Code Output Quest</a></li>
+            <li><a href="custom-test.html">Custom Challenge</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Standard Tests</h5>
+          <ul>
+            <li><a href="index.html#difficultySection">Easy Test</a></li>
+            <li><a href="index.html#difficultySection">Medium Test</a></li>
+            <li><a href="index.html#difficultySection">Hard Test</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 QuizNest Mock Test Platform</div>
+        <div>Arcade high scores are stored safely in localStorage.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/questions.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/games.js"></script>
+</body>
+</html>

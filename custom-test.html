@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Test Builder - QuizNest</title>
+  <meta name="description" content="Configure custom mock tests with tailored subjects, question counts, and time limits, or author your own questions.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="custom-test.html" class="active">Custom Test</a></li>
+          <li><a href="games.html">Arcade</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </nav>
+
+      <div id="navUserBadge" class="nav-user-badge">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= Custom Test Content ================= -->
+  <main class="container" style="padding: 40px 24px; flex: 1;">
+    
+    <div class="section-header">
+      <span class="section-tag">Personalized Practice</span>
+      <h2>Custom Mock Test Builder</h2>
+      <p>Configure test parameters according to your specific exam preparation needs.</p>
+    </div>
+
+    <!-- Part 1: Custom Test Launcher Form -->
+    <div class="form-card" style="margin-bottom: 40px;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+        <span>⚙️</span> Configure Test Parameters
+      </h3>
+
+      <form id="customTestForm">
+        <!-- Subject Selection -->
+        <div class="form-group">
+          <label for="customCategory">Subject / Domain</label>
+          <select id="customCategory" class="form-control">
+            <option value="all">Comprehensive (Mixed Subjects)</option>
+            <option value="web_development">Web Development (HTML, CSS, JavaScript)</option>
+            <option value="computer_science">Computer Science (DSA, OOP, OS, Networks)</option>
+            <option value="general_tech">General Tech & Aptitude</option>
+          </select>
+        </div>
+
+        <!-- Difficulty Selection -->
+        <div class="form-group">
+          <label for="customDifficulty">Difficulty Level</label>
+          <select id="customDifficulty" class="form-control">
+            <option value="easy">Easy (Beginner-Friendly)</option>
+            <option value="medium" selected>Medium (Standard Conceptual)</option>
+            <option value="hard">Hard (Advanced / Challenging)</option>
+          </select>
+        </div>
+
+        <!-- Question Count & Time Limit in 2 Columns -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="customCount">Number of Questions</label>
+            <select id="customCount" class="form-control">
+              <option value="5">5 Questions (Quick)</option>
+              <option value="10" selected>10 Questions (Standard)</option>
+              <option value="15">15 Questions (Full Test)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="customTimer">Time Limit</label>
+            <select id="customTimer" class="form-control">
+              <option value="3">3 Minutes (Fast Pace)</option>
+              <option value="5" selected>5 Minutes (Standard)</option>
+              <option value="10">10 Minutes (Generous)</option>
+              <option value="15">15 Minutes (In-Depth)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
+          🚀 Launch Custom Mock Test
+        </button>
+      </form>
+    </div>
+
+    <!-- Part 2: Question Authoring Section (Add Your Own Question) -->
+    <div class="form-card">
+      <h3 style="font-size: 1.3rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+        <span>✍️</span> Author Custom Question
+      </h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">
+        Add your own questions to the test bank! They will be automatically saved in localStorage and included in tests.
+      </p>
+
+      <div id="customQuestionAlert" class="badge badge-easy" style="display: none; width: 100%; padding: 12px; margin-bottom: 20px; font-size: 0.9rem;">
+        ✅ Question added successfully!
+      </div>
+
+      <form id="addQuestionForm">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="newCategory">Category</label>
+            <select id="newCategory" class="form-control" required>
+              <option value="web_development">Web Development</option>
+              <option value="computer_science">Computer Science</option>
+              <option value="general_tech">General Tech</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="newDifficulty">Difficulty</label>
+            <select id="newDifficulty" class="form-control" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newQuestionText">Question Text</label>
+          <input type="text" id="newQuestionText" class="form-control" placeholder="e.g. Which hook is used to manage state in React?" required>
+        </div>
+
+        <!-- 4 Options -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label for="newOptA">Option A</label>
+            <input type="text" id="newOptA" class="form-control" placeholder="Option A text" required>
+          </div>
+          <div class="form-group">
+            <label for="newOptB">Option B</label>
+            <input type="text" id="newOptB" class="form-control" placeholder="Option B text" required>
+          </div>
+          <div class="form-group">
+            <label for="newOptC">Option C</label>
+            <input type="text" id="newOptC" class="form-control" placeholder="Option C text" required>
+          </div>
+          <div class="form-group">
+            <label for="newOptD">Option D</label>
+            <input type="text" id="newOptD" class="form-control" placeholder="Option D text" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newCorrectChoice">Which Option is Correct?</label>
+          <select id="newCorrectChoice" class="form-control" required>
+            <option value="0">Option A</option>
+            <option value="1">Option B</option>
+            <option value="2">Option C</option>
+            <option value="3">Option D</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="newExplanation">Explanation (Shown during answer review)</label>
+          <textarea id="newExplanation" class="form-control" rows="2" placeholder="Explain why the chosen option is correct..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success" style="width: 100%;">
+          ➕ Add Question to Bank
+        </button>
+      </form>
+
+      <!-- Custom Questions Manager -->
+      <div style="margin-top: 36px; border-top: 1px solid var(--border-color); padding-top: 24px;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">Your Authored Questions</h4>
+        <div id="customQuestionsList">
+          <!-- Dynamically populated by custom-test.js -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= Site Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand-logo">
+            <span class="logo-icon">⚡</span>
+            <span>Quiz<span class="logo-highlight">Nest</span></span>
+          </div>
+          <p>
+            Custom tests give you full control over question counts, subject domains, and time pressure.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="games.html">Arcade & Games</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Standard Tests</h5>
+          <ul>
+            <li><a href="index.html#difficultySection">Easy Test (5m)</a></li>
+            <li><a href="index.html#difficultySection">Medium Test (7m)</a></li>
+            <li><a href="index.html#difficultySection">Hard Test (10m)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Authoring</h5>
+          <ul>
+            <li><a>Add Custom Questions</a></li>
+            <li><a>Persistent in Browser</a></li>
+            <li><a>Instant Integration</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 QuizNest Mock Test Platform</div>
+        <div>Custom tests and questions remain saved in your browser localStorage.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/custom-test.js"></script>
+</body>
+</html>

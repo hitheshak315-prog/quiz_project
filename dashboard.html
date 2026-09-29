@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - QuizNest</title>
+  <meta name="description" content="View your historical mock test performance, score analytics, and progress tracking on QuizNest.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="custom-test.html">Custom Test</a></li>
+          <li><a href="games.html">Arcade</a></li>
+        </ul>
+      </nav>
+
+      <div id="navUserBadge" class="nav-user-badge">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= Dashboard Main Content ================= -->
+  <main class="container" style="padding: 40px 24px; flex: 1;">
+    
+    <!-- Dashboard Header -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="badge badge-medium" style="margin-bottom: 8px;">Analytics & Logs</span>
+        <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px;" id="dashWelcome">
+          Student Performance Dashboard
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Track your mock test results, accuracy rates, and historical progression over time.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <button class="btn btn-outline btn-sm" id="btnClearHistory" style="border-color: rgba(239, 68, 68, 0.4); color: var(--danger);">
+          🗑️ Clear History
+        </button>
+        <a href="index.html#difficultySection" class="btn btn-primary btn-sm">
+          + New Test
+        </a>
+      </div>
+    </div>
+
+    <!-- Aggregate Metrics Grid -->
+    <div class="dashboard-grid">
+      <!-- Tests Taken -->
+      <div class="dash-stat-box">
+        <div class="icon">📝</div>
+        <div class="dash-num" id="dashTestsTaken">0</div>
+        <div class="dash-lbl">Tests Taken</div>
+      </div>
+
+      <!-- Average Score -->
+      <div class="dash-stat-box">
+        <div class="icon">📊</div>
+        <div class="dash-num" id="dashAvgScore">0%</div>
+        <div class="dash-lbl">Average Score</div>
+      </div>
+
+      <!-- Best Score -->
+      <div class="dash-stat-box">
+        <div class="icon">🏆</div>
+        <div class="dash-num" id="dashBestScore">0%</div>
+        <div class="dash-lbl">Best Score</div>
+      </div>
+
+      <!-- Total Questions Attempted -->
+      <div class="dash-stat-box">
+        <div class="icon">🎯</div>
+        <div class="dash-num" id="dashTotalAttempted">0</div>
+        <div class="dash-lbl">Questions Attempted</div>
+      </div>
+
+      <!-- Total Correct Answers -->
+      <div class="dash-stat-box">
+        <div class="icon">✅</div>
+        <div class="dash-num" id="dashTotalCorrect" style="color: var(--success);">0</div>
+        <div class="dash-lbl">Correct Answers</div>
+      </div>
+
+      <!-- Overall Accuracy -->
+      <div class="dash-stat-box">
+        <div class="icon">⚡</div>
+        <div class="dash-num" id="dashAccuracy" style="color: var(--accent-cyan);">0%</div>
+        <div class="dash-lbl">Overall Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Recent Test Attempts History Table -->
+    <div class="table-container">
+      <div class="table-header-bar">
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 700;">Recent Test Attempts</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">
+            Full history of tests taken in this browser session.
+          </p>
+        </div>
+        <a href="index.html#difficultySection" class="btn btn-sm btn-outline">
+          Take Another Test
+        </a>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Test Subject</th>
+              <th>Difficulty</th>
+              <th>Score</th>
+              <th>Percentage</th>
+              <th>Time Taken</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="dashAttemptsTableBody">
+            <!-- Dynamically populated by dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div id="dashEmptyState" style="display: none; text-align: center; padding: 48px 24px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">📭</div>
+        <h4 style="font-size: 1.2rem; font-weight: 700;">No test attempts yet!</h4>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+          Take your first mock test to see your performance analytics here.
+        </p>
+        <a href="index.html#difficultySection" class="btn btn-primary">
+          Start Your First Test ➜
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= Clear History Modal ================= -->
+  <div class="modal-overlay" id="clearHistoryModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-icon">⚠️</div>
+        <h3>Clear All Test History?</h3>
+        <p>This will permanently delete all your previous test scores, review data, and analytics from localStorage.</p>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btnCancelClear">Cancel</button>
+        <button class="btn btn-danger" id="btnConfirmClear">Yes, Delete All History</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Site Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand-logo">
+            <span class="logo-icon">⚡</span>
+            <span>Quiz<span class="logo-highlight">Nest</span></span>
+          </div>
+          <p>
+            Continuous testing builds long-term memory. Monitor your growth and retake tests regularly.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="custom-test.html">Custom Test</a></li>
+            <li><a href="games.html">Arcade & Games</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Difficulty Levels</h5>
+          <ul>
+            <li><a href="index.html#difficultySection">Easy Test</a></li>
+            <li><a href="index.html#difficultySection">Medium Test</a></li>
+            <li><a href="index.html#difficultySection">Hard Test</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Project Details</h5>
+          <ul>
+            <li><a>College BCA Mock Test</a></li>
+            <li><a>Vanilla JS Architecture</a></li>
+            <li><a>localStorage Database</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 QuizNest Mock Test Platform</div>
+        <div>All performance records saved locally in your browser.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

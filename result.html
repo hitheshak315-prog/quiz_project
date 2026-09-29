@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Results - QuizNest</title>
+  <meta name="description" content="View your mock test score, performance analysis, and accuracy breakdown on QuizNest.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="custom-test.html">Custom Test</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= Results Main Content ================= -->
+  <main class="container" style="flex: 1;">
+    <div class="result-container">
+      <div class="result-card">
+
+        <!-- Winner / Top Performer Trophy Banner (Displayed if score >= 80%) -->
+        <div class="winner-trophy-banner" id="trophyBanner" style="display: none;">
+          <div class="trophy-icon">🏆</div>
+          <div style="text-align: left;">
+            <h4 style="color: #fde68a; font-size: 1.15rem; margin-bottom: 2px;">Top Performer Distinction!</h4>
+            <div id="trophyUsername" style="font-size: 0.95rem; color: #fff;">
+              Congratulations, Candidate! You are one of the top performers!
+            </div>
+          </div>
+        </div>
+
+        <span class="badge badge-easy" style="margin-bottom: 12px;">Quiz Completed! 🎉</span>
+        <h1 id="resultUserCongrats" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 8px;">
+          Congratulations, Candidate!
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 1rem;">
+          Here is your comprehensive performance breakdown for this attempt:
+        </p>
+
+        <!-- Score Meter Circle -->
+        <div class="score-display-wrapper">
+          <div class="score-circle">
+            <span class="score-big" id="scoreBig">0</span>
+            <span class="score-total" id="scoreTotal">/ 10</span>
+          </div>
+          <span class="percentage-badge" id="percentageBadge">0% Score</span>
+        </div>
+
+        <!-- Performance Feedback Message Box -->
+        <div class="performance-msg-box">
+          <h4 id="perfTitle">Evaluating Performance...</h4>
+          <p id="perfDesc">Your performance details will display here.</p>
+        </div>
+
+        <!-- Metric Details Cards Grid -->
+        <div class="result-stats-grid">
+          <div class="res-stat-card correct">
+            <div class="val" id="resCorrect">0</div>
+            <div class="lbl">Correct Answers</div>
+          </div>
+
+          <div class="res-stat-card incorrect">
+            <div class="val" id="resIncorrect">0</div>
+            <div class="lbl">Incorrect Answers</div>
+          </div>
+
+          <div class="res-stat-card unanswered">
+            <div class="val" id="resUnanswered">0</div>
+            <div class="lbl">Unanswered</div>
+          </div>
+
+          <div class="res-stat-card">
+            <div class="val" id="resTotal">10</div>
+            <div class="lbl">Total Questions</div>
+          </div>
+
+          <div class="res-stat-card">
+            <div class="val" id="resDifficulty" style="color: var(--primary-light);">EASY</div>
+            <div class="lbl">Difficulty</div>
+          </div>
+
+          <div class="res-stat-card time">
+            <div class="val" id="resTimeTaken">00:00</div>
+            <div class="lbl">Time Taken</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="result-action-buttons">
+          <button class="btn btn-primary btn-lg" id="btnReviewAnswers">
+            📝 Review Answers & Explanations
+          </button>
+
+          <button class="btn btn-outline btn-lg" id="btnRetakeTest">
+            🔄 Retake Test
+          </button>
+
+          <button class="btn btn-outline btn-lg" id="btnTryAnotherTest">
+            🎯 Try Another Test
+          </button>
+
+          <button class="btn btn-outline btn-lg" id="btnGoDashboard">
+            📊 View Dashboard
+          </button>
+
+          <button class="btn btn-outline btn-lg" id="btnGoLeaderboard">
+            🏆 Leaderboard
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= Site Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand-logo">
+            <span class="logo-icon">⚡</span>
+            <span>Quiz<span class="logo-highlight">Nest</span></span>
+          </div>
+          <p>
+            Dynamic college mock testing platform. Review your mistakes to reinforce knowledge.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Next Steps</h5>
+          <ul>
+            <li><a href="review.html">Review Test Answers</a></li>
+            <li><a href="dashboard.html">View Performance History</a></li>
+            <li><a href="leaderboard.html">Check College Leaderboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>More Tests</h5>
+          <ul>
+            <li><a href="index.html#difficultySection">Take Medium Test</a></li>
+            <li><a href="index.html#difficultySection">Take Hard Test</a></li>
+            <li><a href="custom-test.html">Create Custom Test</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Arcade & Games</h5>
+          <ul>
+            <li><a href="games.html">60-Sec Speed Blitz</a></li>
+            <li><a href="games.html">Code Output Quest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 QuizNest Mock Test Platform</div>
+        <div>All performance records saved locally in your browser.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/result.js"></script>
+</body>
+</html>

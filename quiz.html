@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Test Session - QuizNest</title>
+  <meta name="description" content="Take your online mock test on QuizNest with real-time timer, mark for review, and instant progress tracking.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <!-- Live Countdown Timer -->
+        <div class="timer-box" id="timerBox">
+          <span>⏱️</span>
+          <span id="timerText">05:00</span>
+        </div>
+
+        <a href="index.html" class="btn btn-sm btn-outline" onclick="return confirm('Are you sure you want to leave? Your progress will be saved in localStorage.');">
+          ✕ Exit Test
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= Quiz Main Area ================= -->
+  <main class="quiz-wrapper">
+    <div class="container">
+
+      <!-- Test Header Bar -->
+      <div class="quiz-top-bar">
+        <div class="quiz-meta-info">
+          <span class="quiz-title" id="quizTestTitle">Comprehensive Mock Test</span>
+          <span id="quizDifficultyBadge" class="badge badge-easy">EASY</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span class="question-counter" id="questionCounter">Question 1 of 10</span>
+        </div>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="quiz-progress-track">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width: 10%;"></div>
+      </div>
+
+      <!-- Quiz Layout: Left Question Card + Right Status Palette -->
+      <div class="quiz-main-layout">
+
+        <!-- Question & Answers Container -->
+        <div class="question-card-container">
+          <div class="question-header">
+            <button class="btn-mark-review" id="btnMarkReview" title="Flag this question to review before final submission">
+              ☆ Mark for Review
+            </button>
+
+            <button class="btn btn-sm btn-outline" id="btnClearChoice" style="font-size: 0.8rem;">
+              Clear Selection
+            </button>
+          </div>
+
+          <!-- Question Content -->
+          <div class="question-text" id="questionText">
+            Loading question...
+          </div>
+
+          <!-- 4 Shuffled Options -->
+          <div class="options-list" id="optionsContainer">
+            <!-- Dynamically populated by quiz.js -->
+          </div>
+
+          <!-- Bottom Navigation Controls -->
+          <div class="quiz-controls">
+            <div class="control-left">
+              <button class="btn btn-outline" id="btnPrev">
+                ← Previous
+              </button>
+            </div>
+
+            <div class="control-right">
+              <button class="btn btn-primary" id="btnNext">
+                Next →
+              </button>
+              <button class="btn btn-success" id="btnSubmitTest" style="display: none;">
+                Submit Test 🏁
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Status Palette (Question Navigation Grid) -->
+        <aside class="status-palette-card">
+          <div class="status-palette-header">
+            <span>Question Palette</span>
+            <span id="paletteSummary" style="font-size: 0.85rem; color: var(--accent-cyan);">0/10 Answered</span>
+          </div>
+
+          <!-- Numbered Question Buttons (1 to N) -->
+          <div class="palette-grid" id="paletteGrid">
+            <!-- Dynamically generated buttons 1..10 -->
+          </div>
+
+          <!-- Palette Legend -->
+          <div class="palette-legend">
+            <div class="legend-item">
+              <div class="legend-indicator indicator-answered"></div>
+              <span>Answered (Saved)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-indicator indicator-unanswered"></div>
+              <span>Not Answered</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-indicator indicator-review"></div>
+              <span>Marked for Review</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-indicator indicator-current"></div>
+              <span>Current Question</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px;">
+            <button class="btn btn-outline btn-sm" style="width: 100%; border-color: rgba(16, 185, 129, 0.4); color: var(--success);" onclick="QuizEngine.promptSubmitConfirmation()">
+              Submit Test Early 🏁
+            </button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= Submit Confirmation Modal ================= -->
+  <div class="modal-overlay" id="submitModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-icon">🏁</div>
+        <h3>Submit Your Test?</h3>
+        <p>Are you sure you want to submit your mock test? Check your progress summary below.</p>
+      </div>
+
+      <div id="submitModalSummary" style="background: rgba(255, 255, 255, 0.04); border-radius: var(--radius-sm); padding: 16px; margin: 16px 0; font-size: 0.95rem; line-height: 1.8;">
+        <!-- Filled dynamically -->
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btnCancelSubmit">Review More</button>
+        <button class="btn btn-success" id="btnConfirmSubmit">Confirm & Submit ➜</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer" style="padding: 30px 0 20px;">
+    <div class="container" style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+      QuizNest Test Engine • Answers are securely preserved in memory and localStorage • Auto-submission enabled
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/questions.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

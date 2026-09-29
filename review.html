@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Test Answers - QuizNest</title>
+  <meta name="description" content="Review your test answers, inspect correct solutions, and read detailed educational explanations.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= Navigation Bar ================= -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Quiz<span class="logo-highlight">Nest</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="result.html">Result Card</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= Review Main Container ================= -->
+  <main class="container" style="padding: 40px 24px; flex: 1;">
+    
+    <!-- Top Summary & Navigation Bar -->
+    <div class="review-header-card">
+      <div>
+        <span class="badge badge-medium" style="margin-bottom: 8px;">Detailed Answer Review</span>
+        <h2 id="reviewTestTitle" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 4px;">
+          Mock Test Review
+        </h2>
+        <div id="reviewScoreSummary" style="font-size: 1rem; color: var(--accent-cyan); font-weight: 700;">
+          Score: -- / -- (--%)
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="result.html" class="btn btn-sm btn-outline">
+          ← Back to Score
+        </a>
+        <a href="index.html" class="btn btn-sm btn-primary">
+          Take Another Test ➜
+        </a>
+      </div>
+    </div>
+
+    <!-- Filters Bar (All, Mistakes, Correct, Marked) -->
+    <div style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">
+        Filter Questions:
+      </div>
+      <div class="review-filters" id="reviewFilters">
+        <!-- Dynamically populated by review.js -->
+      </div>
+    </div>
+
+    <!-- Question Explanations List -->
+    <div id="reviewQuestionsList">
+      <!-- Dynamically populated by review.js -->
+      <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+        Loading question answers and explanations...
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand-logo">
+            <span class="logo-icon">⚡</span>
+            <span>Quiz<span class="logo-highlight">Nest</span></span>
+          </div>
+          <p>
+            Understanding your mistakes is the best way to learn. Review key concepts and retake tests until mastery.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Actions</h5>
+          <ul>
+            <li><a href="result.html">Back to Score</a></li>
+            <li><a href="dashboard.html">View All Attempts</a></li>
+            <li><a href="leaderboard.html">Leaderboard Rankings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Test Levels</h5>
+          <ul>
+            <li><a href="index.html#difficultySection">Easy Test</a></li>
+            <li><a href="index.html#difficultySection">Medium Test</a></li>
+            <li><a href="index.html#difficultySection">Hard Test</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Arcade</h5>
+          <ul>
+            <li><a href="games.html">Web Dev Blitz</a></li>
+            <li><a href="games.html">Code Output Quest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 QuizNest Mock Test Platform</div>
+        <div>All explanations authored for BCA/CS student success.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/review.js"></script>
+</body>
+</html>
